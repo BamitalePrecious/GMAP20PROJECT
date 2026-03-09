@@ -81,7 +81,7 @@
 
         <div id="invest-flow-overlay" class="flow-container" style="display: none;">
             <div class="flow-header">
-                <i class="fa-solid fa-arrow-left" onclick="hideInvestmentFlow()"></i>
+                <i class="fa-solid fa-arrow-left" onclick="handleBack()"></i>
                 <h2 id="flow-title">Investments</h2>
             </div>
 
@@ -91,27 +91,51 @@
                     <div class="invest-option" onclick="goToStep('step-tenor')">
                         <div class="i-icon low"><i class="fa-solid fa-shield-halved"></i></div>
                         <h4>Treasury Bills</h4>
-                        <p>Maturity: 91-364 days</p>
+                        <p>Maturity: 91-364 days<br>Min: ₦10,000</p>
                         <span class="badge low">Low Risk</span>
                     </div>
                     <div class="invest-option">
-                        <div class="i-icon med"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="i-icon med"><i class="fa-solid fa-layer-group"></i></div>
                         <h4>Mutual Funds</h4>
-                        <p>Min: ₦5,000</p>
+                        <p>Maturity: Flexible<br>Min: ₦5,000</p>
                         <span class="badge med">Medium Risk</span>
+                    </div>
+                    <div class="invest-option">
+                        <div class="i-icon med"><i class="fa-solid fa-dollar-sign"></i></div>
+                        <h4>Eurobonds</h4>
+                        <p>Dollar Invest<br>Min: $1,000</p>
+                        <span class="badge med">Medium Risk</span>
+                    </div>
+                    <div class="invest-option">
+                        <div class="i-icon low"><i class="fa-solid fa-landmark"></i></div>
+                        <h4>FGN Bonds</h4>
+                        <p>Savings Bonds<br>Min: ₦5,000</p>
+                        <span class="badge low">Low Risk</span>
+                    </div>
+                    <div class="invest-option">
+                        <div class="i-icon low"><i class="fa-solid fa-vault"></i></div>
+                        <h4>Fixed Deposit</h4>
+                        <p>Guaranteed<br>Min: ₦50,000</p>
+                        <span class="badge low">Low Risk</span>
+                    </div>
+                    <div class="invest-option">
+                        <div class="i-icon high"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                        <h4>Stocks</h4>
+                        <p>UBA, MTN, etc.<br>Min: 100 units</p>
+                        <span class="badge high">High Risk</span>
                     </div>
                 </div>
             </div>
 
             <div id="step-tenor" class="flow-step" style="display: none;">
-                <p class="flow-subtitle">Low-risk, government-backed investment with steady returns.</p>
+                <p class="flow-subtitle">Select an investment duration (Tenor) for your Treasury Bill.</p>
                 <div class="list-item" onclick="goToStep('step-review')">
                     <div class="i-icon low"><i class="fa-solid fa-calendar-days"></i></div>
                     <div><strong>91 Days</strong>
                         <p>91 Days to Maturity</p>
                     </div>
                 </div>
-                <div class="list-item">
+                <div class="list-item" onclick="goToStep('step-review')">
                     <div class="i-icon low"><i class="fa-solid fa-calendar-days"></i></div>
                     <div><strong>182 Days</strong>
                         <p>182 Days to Maturity</p>
@@ -120,26 +144,42 @@
             </div>
 
             <div id="step-review" class="flow-step" style="display: none;">
-                <p class="flow-subtitle">Please review your investment details before proceeding.</p>
+                <p class="flow-subtitle">Please, review your investment details before proceeding.</p>
                 <div class="summary-box">
                     <h3>Investment Summary</h3>
-                    <div class="s-row"><span>Effective Yield</span> <strong>15%</strong></div>
-                    <div class="s-row"><span>Amount Invested</span> <strong>₦10,000</strong></div>
+                    <div class="s-row"><span>Price per unit</span> <strong>₦100.00</strong></div>
+                    <div class="s-row"><span>Effective Yield</span> <strong>15.0000%</strong></div>
+                    <div class="s-row"><span>Amount Invested</span> <strong>₦10,000.00</strong></div>
                     <div class="s-row"><span>Tenor</span> <strong>91 days</strong></div>
+                    <div class="s-row"><span>Maturity Date</span> <strong>20-Nov-2026</strong></div>
                     <div class="s-row"><span class="green-txt">Net Interest</span> <strong
-                            class="green-txt">+₦1,500</strong></div>
-                    <div class="s-row total"><span>Estimated Return</span> <strong>₦11,500</strong></div>
+                            class="green-txt">+₦1,500.00</strong></div>
+                    <hr class="divider">
+                    <div class="s-row total"><span>Estimated Return</span> <strong>₦11,500.00</strong></div>
+                </div>
+                <div class="summary-box mini">
+                    <div class="s-row">
+                        <div>
+                            <p class="label">Debit Account</p><strong>Savings Account</strong>
+                        </div>
+                        <div style="text-align: right;">
+                            <p class="label">Amount to debit</p><strong>₦10,000.00</strong>
+                        </div>
+                    </div>
                 </div>
                 <button class="btn-main-red" onclick="goToStep('step-success')">Confirm & Pay</button>
             </div>
 
             <div id="step-success" class="flow-step" style="display: none;">
-                <div class="success-wrap">
+                <div class="success-wrap" style="text-align: center;">
+                    <i class="fa-solid fa-circle-check"
+                        style="font-size: 60px; color: #2e7d32; margin: 40px 0 20px;"></i>
                     <h2>Investment in Progress</h2>
-                    <p>Your investment will appear in your portfolio shortly.</p>
+                    <p class="flow-subtitle">Your investment is being processed and will appear in your portfolio
+                        shortly.</p>
                     <div class="summary-box">
                         <div class="s-row"><span>Type</span> <strong>Treasury Bills</strong></div>
-                        <div class="s-row"><span>Return</span> <strong>₦11,500</strong></div>
+                        <div class="s-row"><span>Return</span> <strong>₦11,500.00</strong></div>
                     </div>
                     <button class="btn-main-red" onclick="hideInvestmentFlow()">View Portfolio</button>
                     <button class="btn-sub-gray" onclick="hideInvestmentFlow()">Back to Dashboard</button>
@@ -149,22 +189,38 @@
     </div>
 
     <script>
+        let currentStep = 'step-menu';
+
         function showInvestmentFlow() {
             document.getElementById('dashboard-view').style.display = 'none';
             document.getElementById('invest-flow-overlay').style.display = 'block';
+            goToStep('step-menu');
         }
+
         function hideInvestmentFlow() {
             document.getElementById('invest-flow-overlay').style.display = 'none';
             document.getElementById('dashboard-view').style.display = 'block';
-            goToStep('step-menu'); // Reset
         }
+
         function goToStep(stepId) {
             document.querySelectorAll('.flow-step').forEach(s => s.style.display = 'none');
             document.getElementById(stepId).style.display = 'block';
+            currentStep = stepId;
 
-            // Dynamic Titles
-            const titles = { 'step-menu': 'Investments', 'step-tenor': 'Treasury Bills', 'step-review': 'Review Investment', 'step-success': '' };
+            const titles = {
+                'step-menu': 'Investments',
+                'step-tenor': 'Treasury Bills',
+                'step-review': 'Review Investment',
+                'step-success': ''
+            };
             document.getElementById('flow-title').innerText = titles[stepId];
+        }
+
+        function handleBack() {
+            if (currentStep === 'step-menu') hideInvestmentFlow();
+            else if (currentStep === 'step-tenor') goToStep('step-menu');
+            else if (currentStep === 'step-review') goToStep('step-tenor');
+            else hideInvestmentFlow();
         }
     </script>
 </body>
