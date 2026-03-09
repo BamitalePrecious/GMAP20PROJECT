@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="phone">
+        <div id="dashboard-view">
+            <div class="header">
+                <div class="top-bar">
+                    <div class="user">
+                        <div class="avatar"><i class="fa-regular fa-user"></i></div>
+                        <div>
+                            <span>Hello,</span>
+                            <h3>BAMITALE PRECIOUS AYOMIKUN</h3>
+                        </div>
+                    </div>
+                    <div class="top-icons"><i class="fa-regular fa-bell"></i></div>
+                </div>
+            </div>
+
+            <div class="balance-card">
+                <p>Total Balance</p>
+                <div class="balance-row">
+                    <h2>NGN 93,000,939.84</h2>
+                    <i class="fa-regular fa-eye-slash"></i>
+                </div>
+                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </div>
+
+            <div class="account-card">
+                <p class="acct">Account: 2106170647</p>
+                <h2>NGN 93,000,939.84</h2>
+                <span>Savings Account</span>
+                <div class="update">Balance last updated at 20:53 PM <i class="fa-solid fa-rotate-right"></i></div>
+            </div>
+
+            <div class="indicator"></div>
+
+            <div class="services">
+                <h3>Services</h3>
+                <div class="service-row">
+                    <div class="service"><i class="fa-solid fa-money-bill-transfer"></i>
+                        <p>Send Money</p>
+                    </div>
+                    <div class="service"><i class="fa-solid fa-mobile-screen"></i>
+                        <p>Pay Bills</p>
+                    </div>
+                    <div class="service"><i class="fa-solid fa-shield-halved"></i>
+                        <p>Life</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="investment">
+                <h3>Investment</h3>
+                <div class="investment-card" onclick="showInvestmentFlow()">
+                    <div class="card-content-overlay">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span>Grow your wealth</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-nav">
+                <div class="nav active"><i class="fa-solid fa-building-columns"></i>
+                    <p>Home</p>
+                </div>
+                <div class="nav"><i class="fa-solid fa-bars"></i>
+                    <p>More</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="invest-flow-overlay" class="flow-container" style="display: none;">
+            <div class="flow-header">
+                <i class="fa-solid fa-arrow-left" onclick="hideInvestmentFlow()"></i>
+                <h2 id="flow-title">Investments</h2>
+            </div>
+
+            <div id="step-menu" class="flow-step">
+                <p class="flow-subtitle">Explore vetted investment opportunities based on your risk preference.</p>
+                <div class="invest-grid">
+                    <div class="invest-option" onclick="goToStep('step-tenor')">
+                        <div class="i-icon low"><i class="fa-solid fa-shield-halved"></i></div>
+                        <h4>Treasury Bills</h4>
+                        <p>Maturity: 91-364 days</p>
+                        <span class="badge low">Low Risk</span>
+                    </div>
+                    <div class="invest-option">
+                        <div class="i-icon med"><i class="fa-solid fa-chart-line"></i></div>
+                        <h4>Mutual Funds</h4>
+                        <p>Min: ₦5,000</p>
+                        <span class="badge med">Medium Risk</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step-tenor" class="flow-step" style="display: none;">
+                <p class="flow-subtitle">Low-risk, government-backed investment with steady returns.</p>
+                <div class="list-item" onclick="goToStep('step-review')">
+                    <div class="i-icon low"><i class="fa-solid fa-calendar-days"></i></div>
+                    <div><strong>91 Days</strong>
+                        <p>91 Days to Maturity</p>
+                    </div>
+                </div>
+                <div class="list-item">
+                    <div class="i-icon low"><i class="fa-solid fa-calendar-days"></i></div>
+                    <div><strong>182 Days</strong>
+                        <p>182 Days to Maturity</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step-review" class="flow-step" style="display: none;">
+                <p class="flow-subtitle">Please review your investment details before proceeding.</p>
+                <div class="summary-box">
+                    <h3>Investment Summary</h3>
+                    <div class="s-row"><span>Effective Yield</span> <strong>15%</strong></div>
+                    <div class="s-row"><span>Amount Invested</span> <strong>₦10,000</strong></div>
+                    <div class="s-row"><span>Tenor</span> <strong>91 days</strong></div>
+                    <div class="s-row"><span class="green-txt">Net Interest</span> <strong
+                            class="green-txt">+₦1,500</strong></div>
+                    <div class="s-row total"><span>Estimated Return</span> <strong>₦11,500</strong></div>
+                </div>
+                <button class="btn-main-red" onclick="goToStep('step-success')">Confirm & Pay</button>
+            </div>
+
+            <div id="step-success" class="flow-step" style="display: none;">
+                <div class="success-wrap">
+                    <h2>Investment in Progress</h2>
+                    <p>Your investment will appear in your portfolio shortly.</p>
+                    <div class="summary-box">
+                        <div class="s-row"><span>Type</span> <strong>Treasury Bills</strong></div>
+                        <div class="s-row"><span>Return</span> <strong>₦11,500</strong></div>
+                    </div>
+                    <button class="btn-main-red" onclick="hideInvestmentFlow()">View Portfolio</button>
+                    <button class="btn-sub-gray" onclick="hideInvestmentFlow()">Back to Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showInvestmentFlow() {
+            document.getElementById('dashboard-view').style.display = 'none';
+            document.getElementById('invest-flow-overlay').style.display = 'block';
+        }
+        function hideInvestmentFlow() {
+            document.getElementById('invest-flow-overlay').style.display = 'none';
+            document.getElementById('dashboard-view').style.display = 'block';
+            goToStep('step-menu'); // Reset
+        }
+        function goToStep(stepId) {
+            document.querySelectorAll('.flow-step').forEach(s => s.style.display = 'none');
+            document.getElementById(stepId).style.display = 'block';
+
+            // Dynamic Titles
+            const titles = { 'step-menu': 'Investments', 'step-tenor': 'Treasury Bills', 'step-review': 'Review Investment', 'step-success': '' };
+            document.getElementById('flow-title').innerText = titles[stepId];
+        }
+    </script>
+</body>
+
+</html>

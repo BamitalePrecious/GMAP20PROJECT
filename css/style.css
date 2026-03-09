@@ -1,0 +1,278 @@
+/* --- ORIGINAL STYLES --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: #eaeaea;
+    display: flex;
+    justify-content: center;
+}
+
+.phone {
+    width: 390px;
+    min-height: 100vh;
+    background: white;
+    position: relative;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    height: 180px;
+    padding: 20px;
+    color: white;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url("https://images.unsplash.com/photo-1560518883-ce09059eeffa");
+    background-size: cover;
+}
+
+.top-bar,
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.top-bar {
+    justify-content: space-between;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.balance-card {
+    background: white;
+    margin: -40px 15px 10px 15px;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.balance-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.arrow {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #e3001b;
+}
+
+.account-card {
+    background: #f7f7f7;
+    margin: 10px 15px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.indicator {
+    width: 8px;
+    height: 8px;
+    background: #e3001b;
+    border-radius: 50%;
+    margin: 15px auto;
+}
+
+.services,
+.loans,
+.investment {
+    padding: 0 15px;
+    margin-bottom: 20px;
+}
+
+.service-row {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.service {
+    background: white;
+    border-radius: 12px;
+    padding: 15px 10px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    min-width: 90px;
+}
+
+.service i {
+    color: #e3001b;
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.investment-card {
+    height: 100px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #ccc;
+}
+
+.bottom-nav {
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.nav.active {
+    color: #e3001b;
+}
+
+/* --- NEW INVESTMENT FLOW STYLES --- */
+.flow-container {
+    padding: 20px;
+    background: white;
+    min-height: 100vh;
+}
+
+.flow-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.flow-header i {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.flow-subtitle {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 20px;
+    line-height: 1.4;
+}
+
+.invest-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.invest-option,
+.list-item {
+    background: #fff;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    cursor: pointer;
+}
+
+.list-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.i-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.i-icon.low {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.i-icon.med {
+    background: #fff8e1;
+    color: #ffa000;
+}
+
+.badge {
+    display: inline-block;
+    padding: 3px 8px;
+    font-size: 10px;
+    border-radius: 4px;
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.badge.low {
+    background: #e8f5e9;
+    color: #4caf50;
+}
+
+.summary-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+}
+
+.s-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 12px 0;
+    font-size: 13px;
+}
+
+.s-row.total {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.green-txt {
+    color: #2e7d32;
+}
+
+.btn-main-red {
+    width: 100%;
+    background: #e3001b;
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.btn-sub-gray {
+    width: 100%;
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+}
