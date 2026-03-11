@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bank Dashboard</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>UBA Mobile App</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -14,215 +14,282 @@
     <div class="phone">
         <div id="dashboard-view">
             <div class="header">
-                <div class="top-bar">
-                    <div class="user">
-                        <div class="avatar"><i class="fa-regular fa-user"></i></div>
-                        <div>
-                            <span>Hello,</span>
-                            <h3>BAMITALE PRECIOUS AYOMIKUN</h3>
-                        </div>
+                <div class="user-info">
+                    <div class="user-text">
+                        <h3>Hello,</h3>
+                        <h2>BAMITALE PRECIOUS AYOMIKUN</h2>
                     </div>
-                    <div class="top-icons"><i class="fa-regular fa-bell"></i></div>
+                    <div class="header-icons"><i class="fa-regular fa-bell"></i></div>
                 </div>
             </div>
 
-            <div class="balance-card">
-                <p>Total Balance</p>
-                <div class="balance-row">
-                    <h2>NGN 93,000,939.84</h2>
-                    <i class="fa-regular fa-eye-slash"></i>
+            <div class="card balance-card">
+                <p class="balance-label">Total Balance</p>
+                <h1 class="balance-amt">NGN <span class="sec-val">98,800,039.84</span> <i
+                        class="fa-regular fa-eye-slash" style="font-size:16px; color:#ccc;" onclick="toggleEye()"></i>
+                </h1>
+                <div class="red-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            </div>
+
+            <div class="card acc-card">
+                <p class="acc-num">Account: 2 1 0 6 1 7 0 6 4 7</p>
+                <h2 class="balance-amt">NGN <span class="sec-val">98,800,039.84</span> <i
+                        class="fa-regular fa-eye-slash" style="font-size:16px; color:#ccc;" onclick="toggleEye()"></i>
+                </h2>
+                <p style="font-size:12px; color:#888; margin-top:8px;">Savings Account</p>
+            </div>
+
+            <h3 class="section-label">Services</h3>
+            <div class="services-scroll">
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-paper-plane"></i></div><span>Send Money</span>
                 </div>
-                <div class="arrow"><i class="fa-solid fa-chevron-right"></i></div>
-            </div>
-
-            <div class="account-card">
-                <p class="acct">Account: 2106170647</p>
-                <h2>NGN 93,000,939.84</h2>
-                <span>Savings Account</span>
-                <div class="update">Balance last updated at 20:53 PM <i class="fa-solid fa-rotate-right"></i></div>
-            </div>
-
-            <div class="indicator"></div>
-
-            <div class="services">
-                <h3>Services</h3>
-                <div class="service-row">
-                    <div class="service"><i class="fa-solid fa-money-bill-transfer"></i>
-                        <p>Send Money</p>
-                    </div>
-                    <div class="service"><i class="fa-solid fa-mobile-screen"></i>
-                        <p>Pay Bills</p>
-                    </div>
-                    <div class="service"><i class="fa-solid fa-shield-halved"></i>
-                        <p>Life</p>
-                    </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-clock-rotate-left"></i></div><span>History</span>
                 </div>
-            </div>
-
-            <div class="investment">
-                <h3>Investment</h3>
-                <div class="investment-card" onclick="showInvestmentFlow()">
-                    <div class="card-content-overlay">
-                        <i class="fa-solid fa-chart-line"></i>
-                        <span>Grow your wealth</span>
-                    </div>
+                <div class="service-item">
+                    <div class="service-icon"><i class="fa-solid fa-receipt"></i></div><span>Pay Bills</span>
+                </div>
+                <div class="service-item" onclick="openFlow()">
+                    <div class="service-icon"><i class="fa-solid fa-chart-pie"></i></div><span>Invest</span>
                 </div>
             </div>
 
-            <div class="bottom-nav">
-                <div class="nav active"><i class="fa-solid fa-building-columns"></i>
-                    <p>Home</p>
+            <h3 class="section-label">Loans</h3>
+            <div class="card" style="padding:0; overflow:hidden; cursor:pointer;" onclick="openFlow()">
+                <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?q=80&w=2071&auto=format&fit=crop"
+                    style="width:100%; height:120px; object-fit:cover;">
+                <div style="padding:15px; display:flex; justify-content:space-between; align-items:center;">
+                    <span style="font-weight:700;">Grow your wealth</span>
+                    <i class="fa-solid fa-chevron-right" style="color:#ccc;"></i>
                 </div>
-                <div class="nav"><i class="fa-solid fa-bars"></i>
-                    <p>More</p>
-                </div>
+            </div>
+
+            <div class="nav">
+                <div class="nav-item active"><i class="fa-solid fa-house"></i>Home</div>
+                <div class="nav-item"><i class="fa-solid fa-bars"></i>More</div>
             </div>
         </div>
 
-        <div id="invest-flow-overlay" class="flow-container" style="display: none;">
+        <div id="master-overlay">
             <div class="flow-header">
-                <i class="fa-solid fa-arrow-left" onclick="handleBack()"></i>
+                <i class="fa-solid fa-arrow-left" onclick="goBack()"></i>
                 <h2 id="flow-title">Investments</h2>
             </div>
+            <p id="flow-sub" style="color:#888; font-size:14px; padding:0 20px; margin-top:5px;">Explore vetted
+                investment opportunities based on your risk preference.</p>
 
-            <div id="step-menu" class="flow-step">
-                <p class="flow-subtitle">Explore vetted investment opportunities based on your risk preference.</p>
-                <div class="invest-grid">
-                    <div class="invest-option" onclick="goToStep('step-tenor')">
-                        <div class="i-icon low"><i class="fa-solid fa-shield-halved"></i></div>
-                        <h4>Treasury Bills</h4>
-                        <p>Maturity: 91-364 days<br>Min: ₦10,000</p>
-                        <span class="badge low">Low Risk</span>
-                    </div>
-                    <div class="invest-option">
-                        <div class="i-icon med"><i class="fa-solid fa-layer-group"></i></div>
-                        <h4>Mutual Funds</h4>
-                        <p>Maturity: Flexible<br>Min: ₦5,000</p>
-                        <span class="badge med">Medium Risk</span>
-                    </div>
-                    <div class="invest-option">
-                        <div class="i-icon med"><i class="fa-solid fa-dollar-sign"></i></div>
-                        <h4>Eurobonds</h4>
-                        <p>Dollar Invest<br>Min: $1,000</p>
-                        <span class="badge med">Medium Risk</span>
-                    </div>
-                    <div class="invest-option">
-                        <div class="i-icon low"><i class="fa-solid fa-landmark"></i></div>
-                        <h4>FGN Bonds</h4>
-                        <p>Savings Bonds<br>Min: ₦5,000</p>
-                        <span class="badge low">Low Risk</span>
-                    </div>
-                    <div class="invest-option">
-                        <div class="i-icon low"><i class="fa-solid fa-vault"></i></div>
-                        <h4>Fixed Deposit</h4>
-                        <p>Guaranteed<br>Min: ₦50,000</p>
-                        <span class="badge low">Low Risk</span>
-                    </div>
-                    <div class="invest-option">
-                        <div class="i-icon high"><i class="fa-solid fa-arrow-trend-up"></i></div>
-                        <h4>Stocks</h4>
-                        <p>UBA, MTN, etc.<br>Min: 100 units</p>
-                        <span class="badge high">High Risk</span>
-                    </div>
-                </div>
-            </div>
-
-            <div id="step-tenor" class="flow-step" style="display: none;">
-                <p class="flow-subtitle">Select an investment duration (Tenor) for your Treasury Bill.</p>
-                <div class="list-item" onclick="goToStep('step-review')">
-                    <div class="i-icon low"><i class="fa-solid fa-calendar-days"></i></div>
-                    <div><strong>91 Days</strong>
-                        <p>91 Days to Maturity</p>
-                    </div>
-                </div>
-                <div class="list-item" onclick="goToStep('step-review')">
-                    <div class="i-icon low"><i class="fa-solid fa-calendar-days"></i></div>
-                    <div><strong>182 Days</strong>
-                        <p>182 Days to Maturity</p>
-                    </div>
-                </div>
-            </div>
-
-            <div id="step-review" class="flow-step" style="display: none;">
-                <p class="flow-subtitle">Please, review your investment details before proceeding.</p>
-                <div class="summary-box">
-                    <h3>Investment Summary</h3>
-                    <div class="s-row"><span>Price per unit</span> <strong>₦100.00</strong></div>
-                    <div class="s-row"><span>Effective Yield</span> <strong>15.0000%</strong></div>
-                    <div class="s-row"><span>Amount Invested</span> <strong>₦10,000.00</strong></div>
-                    <div class="s-row"><span>Tenor</span> <strong>91 days</strong></div>
-                    <div class="s-row"><span>Maturity Date</span> <strong>20-Nov-2026</strong></div>
-                    <div class="s-row"><span class="green-txt">Net Interest</span> <strong
-                            class="green-txt">+₦1,500.00</strong></div>
-                    <hr class="divider">
-                    <div class="s-row total"><span>Estimated Return</span> <strong>₦11,500.00</strong></div>
-                </div>
-                <div class="summary-box mini">
-                    <div class="s-row">
-                        <div>
-                            <p class="label">Debit Account</p><strong>Savings Account</strong>
+            <div class="flow-content">
+                <div id="step-grid" class="step">
+                    <div class="invest-grid">
+                        <div class="invest-option" onclick="next('step-tenors', 'Treasury Bills')">
+                            <div class="opt-icon" style="background:#e6f6f0; color:#5cb88a;"><i
+                                    class="fa-solid fa-shield-halved"></i></div>
+                            <h4 style="font-size:14px;">Treasury Bills</h4>
+                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: 91-364 days</p>
+                            <span class="badge" style="background:#e6f6f0; color:#219653;">Low Risk</span>
                         </div>
-                        <div style="text-align: right;">
-                            <p class="label">Amount to debit</p><strong>₦10,000.00</strong>
+                        <div class="invest-option">
+                            <div class="opt-icon" style="background:#fff8e6; color:#f2c94c;"><i
+                                    class="fa-solid fa-chart-line"></i></div>
+                            <h4 style="font-size:14px;">Mutual Funds</h4>
+                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: Flexible</p>
+                            <span class="badge" style="background:#fff8e6; color:#f2994a;">Medium Risk</span>
+                        </div>
+                        <div class="invest-option">
+                            <div class="opt-icon" style="background:#fff0f0; color:#eb5757;"><i
+                                    class="fa-solid fa-dollar-sign"></i></div>
+                            <h4 style="font-size:14px;">Dollar Investment</h4>
+                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: Flexible</p>
+                            <span class="badge" style="background:#fff0f0; color:#eb5757;">High Risk</span>
+                        </div>
+                        <div class="invest-option">
+                            <div class="opt-icon" style="background:#eefbff; color:#56ccf2;"><i
+                                    class="fa-solid fa-building-columns"></i></div>
+                            <h4 style="font-size:14px;">Bonds</h4>
+                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: 2-30 years</p>
+                            <span class="badge" style="background:#fff8e6; color:#f2994a;">Medium Risk</span>
+                        </div>
+                        <div class="invest-option">
+                            <div class="opt-icon" style="background:#f0f4ff; color:#5677fc;"><i
+                                    class="fa-solid fa-vault"></i></div>
+                            <h4 style="font-size:14px;">Fixed Deposit</h4>
+                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: 30-180 days</p>
+                            <span class="badge" style="background:#e6f6f0; color:#219653;">Low Risk</span>
+                        </div>
+                        <div class="invest-option">
+                            <div class="opt-icon" style="background:#f9f0ff; color:#af52de;"><i
+                                    class="fa-solid fa-arrow-trend-up"></i></div>
+                            <h4 style="font-size:14px;">UBA Stocks</h4>
+                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: Flexible</p>
+                            <span class="badge" style="background:#fff0f0; color:#eb5757;">High Risk</span>
                         </div>
                     </div>
                 </div>
-                <button class="btn-main-red" onclick="goToStep('step-success')">Confirm & Pay</button>
-            </div>
 
-            <div id="step-success" class="flow-step" style="display: none;">
-                <div class="success-wrap" style="text-align: center;">
-                    <i class="fa-solid fa-circle-check"
-                        style="font-size: 60px; color: #2e7d32; margin: 40px 0 20px;"></i>
-                    <h2>Investment in Progress</h2>
-                    <p class="flow-subtitle">Your investment is being processed and will appear in your portfolio
-                        shortly.</p>
+                <div id="step-tenors" class="step" style="display:none;">
+                    <p style="color:#888; font-size:14px; margin-bottom:20px;">Low-risk, government-backed investment
+                        with steady returns.</p>
+                    <div class="tenor-item" onclick="selectTenor(91, 0.15)">
+                        <div class="tenor-icon"><i class="fa-solid fa-file-lines"></i></div>
+                        <div><strong>91 Days</strong>
+                            <p style="font-size:12px; color:#888;">91 Days to Maturity</p>
+                        </div>
+                    </div>
+                    <div class="tenor-item" onclick="selectTenor(182, 0.16)">
+                        <div class="tenor-icon"><i class="fa-solid fa-file-lines"></i></div>
+                        <div><strong>182 Days</strong>
+                            <p style="font-size:12px; color:#888;">182 Days to Maturity</p>
+                        </div>
+                    </div>
+                    <div class="tenor-item" onclick="selectTenor(364, 0.18)">
+                        <div class="tenor-icon"><i class="fa-solid fa-file-lines"></i></div>
+                        <div><strong>364 Days</strong>
+                            <p style="font-size:12px; color:#888;">364 Days to Maturity</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step-calc" class="step" style="display:none;">
+                    <p style="font-size:13px; color:#888; margin-bottom:5px;">Enter Investment Amount</p>
+                    <div class="input-group">
+                        <span style="font-size:24px; font-weight:bold; margin-right:10px;">₦</span>
+                        <input type="text" id="amt-in" value="10,000" oninput="doCalc(this)">
+                    </div>
+                    <div class="summary-box" style="margin-bottom:20px;">
+                        <div class="s-row"><span>Debit Account</span><strong>Savings Account</strong></div>
+                        <div class="s-row"><span>Available Balance</span><strong>₦1,050,000</strong></div>
+                    </div>
                     <div class="summary-box">
-                        <div class="s-row"><span>Type</span> <strong>Treasury Bills</strong></div>
-                        <div class="s-row"><span>Return</span> <strong>₦11,500.00</strong></div>
+                        <h4 style="margin-bottom:15px; font-size:15px;">Investment Summary</h4>
+                        <div class="s-row"><span>Face Value</span><strong id="s-face">₦10,000</strong></div>
+                        <div class="s-row"><span>Purchase Price</span><strong id="s-price">₦9,626.03</strong></div>
+                        <div class="s-row"><span>Effective Yield</span><strong id="s-yield">15%</strong></div>
+                        <div class="s-row"><span>Days to Maturity</span><strong id="s-days">91 days</strong></div>
+                        <div class="s-row"><span>Net Interest</span><strong class="green" id="s-net">+₦373.97</strong>
+                        </div>
                     </div>
-                    <button class="btn-main-red" onclick="hideInvestmentFlow()">View Portfolio</button>
-                    <button class="btn-sub-gray" onclick="hideInvestmentFlow()">Back to Dashboard</button>
+                    <button class="btn-red" onclick="next('step-review', 'Review Investment')">Confirm
+                        Investment</button>
+                </div>
+
+                <div id="step-review" class="step" style="display:none;">
+                    <p style="color:#888; font-size:14px; margin-bottom:20px;">Please, review your investment details
+                        before proceeding.</p>
+                    <div class="summary-box">
+                        <div class="s-row"><span>Debit Account</span><strong>Savings Account</strong></div>
+                        <div class="s-row"><span>Amount to debit</span><strong id="r-debit">₦10,000</strong></div>
+                    </div>
+                    <div class="summary-box">
+                        <h4 style="margin-bottom:15px; font-size:15px;">Investment Summary</h4>
+                        <div class="s-row"><span>Face Value</span><strong id="r-face">₦10,000</strong></div>
+                        <div class="s-row"><span>Purchase Price</span><strong id="r-price">₦9,626.03</strong></div>
+                        <div class="s-row"><span>Effective Yield</span><strong id="r-yield">15%</strong></div>
+                        <div class="s-row"><span>Days to Maturity</span><strong id="r-days">91 days</strong></div>
+                        <div class="s-row"><span>Maturity Date</span><strong id="r-date">20-Nov-2026</strong></div>
+                        <div class="s-row"><span>Net Interest</span><strong class="green" id="r-net">+₦373.97</strong>
+                        </div>
+                        <div class="s-row" style="border-top:1px solid #f0f0f0; padding-top:10px; margin-top:10px;">
+                            <span>Total Return</span><strong id="r-total">₦10,000</strong>
+                        </div>
+                    </div>
+                    <button class="btn-red" onclick="next('step-success', 'Investment in Progress')">Confirm &
+                        Pay</button>
+                    <button class="btn-grey" onclick="goBack()">Go Back</button>
+                </div>
+
+                <div id="step-success" class="step" style="display:none;">
+                    <p style="color:#888; font-size:14px; margin-bottom:25px;">Your investment is being processed and
+                        will appear in your portfolio shortly.</p>
+                    <div class="summary-box">
+                        <div class="s-row"><span>Investment Type</span><strong>Treasury Bills</strong></div>
+                        <div class="s-row"><span>Purchase Price</span><strong id="suc-price">₦9,626.03</strong></div>
+                        <div class="s-row"><span>Tenor</span><strong id="suc-tenor">91 days</strong></div>
+                        <div class="s-row"><span>Total Return</span><strong id="suc-total">₦10,000</strong></div>
+                    </div>
+                    <button class="btn-red" style="margin-top:20px;" onclick="location.reload()">View Portfolio</button>
+                    <button class="btn-grey" onclick="location.reload()">Back to Dashboard</button>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        let currentStep = 'step-menu';
+        let stack = [];
+        let state = { tenor: 91, yield: 0.15 };
 
-        function showInvestmentFlow() {
-            document.getElementById('dashboard-view').style.display = 'none';
-            document.getElementById('invest-flow-overlay').style.display = 'block';
-            goToStep('step-menu');
+        function openFlow() {
+            document.getElementById('master-overlay').style.display = 'flex';
+            next('step-grid', 'Investments');
         }
 
-        function hideInvestmentFlow() {
-            document.getElementById('invest-flow-overlay').style.display = 'none';
-            document.getElementById('dashboard-view').style.display = 'block';
+        function next(id, title) {
+            document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+            document.getElementById('flow-title').innerText = title;
+            document.getElementById('flow-sub').style.display = (id === 'step-grid') ? 'block' : 'none';
+            stack.push({ id, title });
+            if (id !== 'step-grid') doCalc();
         }
 
-        function goToStep(stepId) {
-            document.querySelectorAll('.flow-step').forEach(s => s.style.display = 'none');
-            document.getElementById(stepId).style.display = 'block';
-            currentStep = stepId;
-
-            const titles = {
-                'step-menu': 'Investments',
-                'step-tenor': 'Treasury Bills',
-                'step-review': 'Review Investment',
-                'step-success': ''
-            };
-            document.getElementById('flow-title').innerText = titles[stepId];
+        function selectTenor(days, y) {
+            state.tenor = days;
+            state.yield = y;
+            next('step-calc', 'Invest in Treasury Bills');
         }
 
-        function handleBack() {
-            if (currentStep === 'step-menu') hideInvestmentFlow();
-            else if (currentStep === 'step-tenor') goToStep('step-menu');
-            else if (currentStep === 'step-review') goToStep('step-tenor');
-            else hideInvestmentFlow();
+        function doCalc(el) {
+            if (el) {
+                let v = el.value.replace(/\D/g, "");
+                el.value = v ? Number(v).toLocaleString() : "";
+            }
+            const val = parseFloat(document.getElementById('amt-in').value.replace(/,/g, "")) || 0;
+            const price = val / (1 + (state.yield * (state.tenor / 365)));
+            const net = val - price;
+            const f = (n) => "₦" + n.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+
+            // Summary Updates
+            document.getElementById('s-face').innerText = f(val);
+            document.getElementById('s-price').innerText = f(price);
+            document.getElementById('s-yield').innerText = (state.yield * 100) + "%";
+            document.getElementById('s-days').innerText = state.tenor + " days";
+            document.getElementById('s-net').innerText = "+" + f(net);
+
+            // Review Updates
+            document.getElementById('r-debit').innerText = f(val);
+            document.getElementById('r-face').innerText = f(val);
+            document.getElementById('r-price').innerText = f(price);
+            document.getElementById('r-yield').innerText = (state.yield * 100) + "%";
+            document.getElementById('r-days').innerText = state.tenor + " days";
+            document.getElementById('r-net').innerText = "+" + f(net);
+            document.getElementById('r-total').innerText = f(val);
+
+            // Success Updates
+            document.getElementById('suc-price').innerText = f(price);
+            document.getElementById('suc-tenor').innerText = state.tenor + " days";
+            document.getElementById('suc-total').innerText = f(val);
+
+            let d = new Date(); d.setDate(d.getDate() + state.tenor);
+            document.getElementById('r-date').innerText = d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).replace(/ /g, '-');
+        }
+
+        function goBack() {
+            stack.pop();
+            if (stack.length === 0) {
+                document.getElementById('master-overlay').style.display = 'none';
+            } else {
+                let p = stack.pop();
+                next(p.id, p.title);
+            }
+        }
+
+        function toggleEye() {
+            document.querySelectorAll('.sec-val').forEach(el => {
+                el.innerText = el.innerText.includes('*') ? "98,800,039.84" : "****";
+            });
         }
     </script>
+
 </body>
 
 </html>
