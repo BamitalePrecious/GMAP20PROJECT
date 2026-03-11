@@ -12,6 +12,46 @@
 <body>
 
     <div class="phone">
+        <div id="login-view">
+            <div class="login-overlay">
+                <div class="login-header-area">
+                    <img src="https://www.ubagroup.com/nigeria/wp-content/uploads/sites/2/2018/12/uba-logo-white.png"
+                        style="width:80px;">
+                </div>
+
+                <div class="login-form-card">
+                    <div class="sign-in-header">
+                        <span>Sign in</span>
+                        <i class="fa-solid fa-circle-arrow-down" style="color: #d80000;"></i>
+                    </div>
+
+                    <div class="login-input-group">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" value="08134483879" readonly>
+                    </div>
+
+                    <div class="login-input-group">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" placeholder="Password">
+                        <i class="fa-solid fa-eye" style="color: #666;"></i>
+                    </div>
+
+                    <p class="forgot-link">Forgot password?</p>
+
+                    <div class="login-btn-row">
+                        <button class="btn-red" style="flex:1;" onclick="handleLogin()">Login</button>
+                        <div class="finger-btn"><i class="fa-solid fa-fingerprint"></i></div>
+                    </div>
+
+                    <div class="top-up-area">
+                        <div class="top-up-circle"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                        <p>Top-up</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main-app" style="display:none;">
+        </div>
         <div id="dashboard-view">
             <div class="header">
                 <div class="user-info">
@@ -81,52 +121,207 @@
 
             <div class="flow-content">
                 <div id="step-grid" class="step">
+
                     <div class="invest-grid">
-                        <div class="invest-option" onclick="next('step-tenors', 'Treasury Bills')">
-                            <div class="opt-icon" style="background:#e6f6f0; color:#5cb88a;"><i
-                                    class="fa-solid fa-shield-halved"></i></div>
+
+                        <!-- Treasury Bills -->
+                        <div class="invest-option" onclick="openTreasuryBills()">
+                            <div class="opt-icon" style="background:#e6f6f0; color:#5cb88a;">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
                             <h4 style="font-size:14px;">Treasury Bills</h4>
-                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: 91-364 days</p>
+                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: 91–364 days</p>
                             <span class="badge" style="background:#e6f6f0; color:#219653;">Low Risk</span>
                         </div>
-                        <div class="invest-option">
-                            <div class="opt-icon" style="background:#fff8e6; color:#f2c94c;"><i
-                                    class="fa-solid fa-chart-line"></i></div>
+
+                        <!-- Mutual Funds -->
+                        <div class="invest-option" onclick="openMutualFunds()">
+                            <div class="opt-icon" style="background:#fff8e6; color:#f2c94c;">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
                             <h4 style="font-size:14px;">Mutual Funds</h4>
                             <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: Flexible</p>
                             <span class="badge" style="background:#fff8e6; color:#f2994a;">Medium Risk</span>
                         </div>
-                        <div class="invest-option">
-                            <div class="opt-icon" style="background:#fff0f0; color:#eb5757;"><i
-                                    class="fa-solid fa-dollar-sign"></i></div>
+
+                        <!-- Dollar Investment -->
+                        <div class="invest-option" onclick="openDollarInvestment()">
+                            <div class="opt-icon" style="background:#fff0f0; color:#eb5757;">
+                                <i class="fa-solid fa-dollar-sign"></i>
+                            </div>
                             <h4 style="font-size:14px;">Dollar Investment</h4>
                             <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: Flexible</p>
                             <span class="badge" style="background:#fff0f0; color:#eb5757;">High Risk</span>
                         </div>
-                        <div class="invest-option">
-                            <div class="opt-icon" style="background:#eefbff; color:#56ccf2;"><i
-                                    class="fa-solid fa-building-columns"></i></div>
+
+                        <!-- Bonds -->
+                        <div class="invest-option" onclick="openBonds()">
+                            <div class="opt-icon" style="background:#eefbff; color:#56ccf2;">
+                                <i class="fa-solid fa-building-columns"></i>
+                            </div>
                             <h4 style="font-size:14px;">Bonds</h4>
-                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: 2-30 years</p>
+                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: 2–30 years</p>
                             <span class="badge" style="background:#fff8e6; color:#f2994a;">Medium Risk</span>
                         </div>
-                        <div class="invest-option">
-                            <div class="opt-icon" style="background:#f0f4ff; color:#5677fc;"><i
-                                    class="fa-solid fa-vault"></i></div>
+
+                        <!-- Fixed Deposit -->
+                        <div class="invest-option" onclick="openFixedDeposit()">
+                            <div class="opt-icon" style="background:#f0f4ff; color:#5677fc;">
+                                <i class="fa-solid fa-vault"></i>
+                            </div>
                             <h4 style="font-size:14px;">Fixed Deposit</h4>
-                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: 30-180 days</p>
+                            <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: 30–180 days</p>
                             <span class="badge" style="background:#e6f6f0; color:#219653;">Low Risk</span>
                         </div>
-                        <div class="invest-option">
-                            <div class="opt-icon" style="background:#f9f0ff; color:#af52de;"><i
-                                    class="fa-solid fa-arrow-trend-up"></i></div>
+
+                        <!-- Stocks -->
+                        <div class="invest-option" onclick="openStocks()">
+                            <div class="opt-icon" style="background:#f9f0ff; color:#af52de;">
+                                <i class="fa-solid fa-arrow-trend-up"></i>
+                            </div>
                             <h4 style="font-size:14px;">UBA Stocks</h4>
                             <p style="font-size:10px; color:#888; margin-top:4px;">Maturity: Flexible</p>
                             <span class="badge" style="background:#fff0f0; color:#eb5757;">High Risk</span>
                         </div>
+
                     </div>
                 </div>
+                <div id="step-fd-main" class="step" style="display:none;">
 
+                    <p style="color:#888; font-size:14px; margin-bottom:20px;">
+                        Lock your funds for a fixed period and earn guaranteed interest.
+                    </p>
+
+                    <div class="fd-card">
+
+                        <label class="fd-label">Deposit Amount</label>
+
+                        <div class="fd-input-box">
+                            <span>₦</span>
+                            <input type="text" id="fd-amount" placeholder="500,000" oninput="formatAmount(this)">
+                        </div>
+
+                        <span class="min-text">Minimum deposit: ₦50,000</span>
+
+                        <div class="tenor-selector-box" onclick="next('step-fd-tenor','Select Tenor')">
+
+                            <span id="fd-selected-tenor">30 days</span>
+
+                            <div>
+                                <span class="rate-text" id="fd-selected-rate">5.5% p.a</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <button class="btn-red" onclick="next('step-fd-review','Review Deposit')">
+                        Continue
+                    </button>
+
+                </div>
+                <div id="step-fd-tenor" class="step" style="display:none;">
+
+                    <p style="color:#888; font-size:14px; margin-bottom:20px;">
+                        Choose a duration for your fixed deposit.
+                    </p>
+
+                    <div class="tenor-list-item" onclick="selectFD(30,5.5)">
+                        30 days <span class="dot">●</span> <span class="rate">5.5% p.a</span>
+                    </div>
+
+                    <div class="tenor-list-item" onclick="selectFD(60,6)">
+                        60 days <span class="dot">●</span> <span class="rate">6.0% p.a</span>
+                    </div>
+
+                    <div class="tenor-list-item" onclick="selectFD(90,6.5)">
+                        90 days <span class="dot">●</span> <span class="rate">6.5% p.a</span>
+                    </div>
+
+                    <div class="tenor-list-item" onclick="selectFD(180,7)">
+                        180 days <span class="dot">●</span> <span class="rate">7.0% p.a</span>
+                    </div>
+
+                </div>
+                <div id="step-fd-review" class="step" style="display:none;">
+                    <div class="review-card-white">
+                        <div class="review-row-flex">
+                            <span>Debit Account</span>
+                            <strong class="dark-text">Savings Account</strong>
+                        </div>
+                        <div class="review-row-flex">
+                            <span>Available Amount</span>
+                            <strong class="dark-text">₦1,050,000</strong>
+                        </div>
+                    </div>
+
+                    <div class="review-card-white">
+                        <h4 class="summary-title">Investment Summary</h4>
+                        <div class="review-row-flex"><span>Investment Amount</span><strong class="dark-text"
+                                id="fd-review-amount">₦300,000</strong></div>
+                        <div class="review-row-flex"><span>Tenor</span><strong class="dark-text" id="fd-review-tenor">90
+                                days</strong></div>
+                        <div class="review-row-flex"><span>Tenor starts</span><strong
+                                class="dark-text">10-03-26</strong></div>
+                        <div class="review-row-flex"><span>Tenor matures</span><strong
+                                class="dark-text">08-06-26</strong></div>
+                        <div class="review-row-flex"><span>Interest rate</span><strong class="dark-text"
+                                id="fd-review-rate">6.5%</strong></div>
+                        <div class="review-row-flex"><span>Net Interest</span><strong class="green-text"
+                                id="fd-review-net">+₦4,808.22</strong></div>
+                        <div class="review-row-flex"><span>Total at Maturity</span><strong class="dark-text"
+                                id="fd-review-total">₦304,808.22</strong></div>
+                    </div>
+
+                    <div class="penalty-warning">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span>Fixed deposits may incur penalties if funds are withdrawn before the maturity date.</span>
+                    </div>
+
+                    <button class="btn-red" onclick="next('step-fd-success','Deposit Successful')">Continue</button>
+                    <button class="btn-grey-outline" onclick="goBack()">Go Back</button>
+                </div>
+                <div id="step-fd-success" class="step" style="display:none;">
+
+                    <div style="text-align:center; margin-top:40px;">
+                        <i class="fa-solid fa-circle-check" style="font-size:60px; color:#27ae60;"></i>
+
+                        <h3 style="margin-top:20px;">Deposit Successful</h3>
+
+                        <p style="color:#888; font-size:14px;">
+                            Your fixed deposit has been successfully set up.
+                        </p>
+                    </div>
+
+                    <div class="review-card">
+
+                        <div class="review-row">
+                            <span>Deposit Amount</span>
+                            <strong id="fd-s-amount">₦300,000</strong>
+                        </div>
+
+                        <div class="review-row">
+                            <span>Total at Maturity</span>
+                            <strong class="green" id="fd-s-total">₦304,808</strong>
+                        </div>
+
+                        <div class="review-row">
+                            <span>Tenor</span>
+                            <strong id="fd-s-tenor">90 days</strong>
+                        </div>
+
+                    </div>
+
+                    <button class="btn-red" onclick="location.reload()">
+                        View Portfolio
+                    </button>
+
+                    <button class="btn-grey" onclick="location.reload()">
+                        Back to Dashboard
+                    </button>
+
+                </div>
                 <div id="step-tenors" class="step" style="display:none;">
                     <p style="color:#888; font-size:14px; margin-bottom:20px;">Low-risk, government-backed investment
                         with steady returns.</p>
@@ -149,7 +344,26 @@
                         </div>
                     </div>
                 </div>
+                <div id="step-fixed-tenors" class="step" style="display:none;">
+                    <p style="color:#888; font-size:14px; margin-bottom:25px;">Choose a duration for your fixed deposit.
+                    </p>
 
+                    <div class="tenor-list-item" onclick="selectTenor(30, 0.055)">
+                        <span>30 days</span> <span class="dot">●</span> <span class="rate">5.5% p.a</span>
+                    </div>
+
+                    <div class="tenor-list-item" onclick="selectTenor(60, 0.06)">
+                        <span>60 days</span> <span class="dot">●</span> <span class="rate">6.0% p.a</span>
+                    </div>
+
+                    <div class="tenor-list-item" onclick="selectTenor(90, 0.065)">
+                        <span>90 days</span> <span class="dot">●</span> <span class="rate">6.5% p.a</span>
+                    </div>
+
+                    <div class="tenor-list-item" onclick="selectTenor(180, 0.07)">
+                        <span>180 days</span> <span class="dot">●</span> <span class="rate">7.0% p.a</span>
+                    </div>
+                </div>
                 <div id="step-calc" class="step" style="display:none;">
                     <p style="font-size:13px; color:#888; margin-bottom:5px;">Enter Investment Amount</p>
                     <div class="input-group">
@@ -214,9 +428,49 @@
         </div>
     </div>
 
-    <script>
+    <script>function handleLogin() {
+            const password = document.getElementById('login-pass').value;
+
+            // For development, we'll allow any password to proceed
+            // Show a quick alert if empty
+            if (password === "") {
+                alert("Please enter your password");
+                return;
+            }
+
+            // Hide Login, Show Dashboard
+            document.getElementById('login-screen').style.display = 'none';
+            document.getElementById('dashboard-view').style.display = 'block';
+
+            // Trigger any dashboard-specific animations here if needed
+            console.log("Authenticated as: BAMITALE PRECIOUS AYOMIKUN");
+        } function handleLogin() {
+            // Hide Login
+            document.getElementById('login-view').style.display = 'none';
+
+            // Show Dashboard
+            document.getElementById('dashboard-view').style.display = 'block';
+
+            // Optional: Log success to console
+            console.log("Welcome, Bamitale Precious Ayomikun");
+        }
+        function handleLogin() {
+            // 1. Find the elements
+            const loginScreen = document.getElementById('login-view');
+            const dashboardScreen = document.getElementById('dashboard-view');
+
+            // 2. Hide Login and Show Dashboard
+            loginScreen.style.display = 'none';
+            dashboardScreen.style.display = 'block';
+
+            // 3. Reset scroll position to top of dashboard
+            window.scrollTo(0, 0);
+        }
         let stack = [];
         let state = { tenor: 91, yield: 0.15 };
+
+
+
 
         function openFlow() {
             document.getElementById('master-overlay').style.display = 'flex';
@@ -287,6 +541,95 @@
             document.querySelectorAll('.sec-val').forEach(el => {
                 el.innerText = el.innerText.includes('*') ? "98,800,039.84" : "****";
             });
+        } function openTreasuryBills() {
+            next('step-tenors', 'Treasury Bills')
+        }
+
+        function openFixedDeposit() {
+            next('step-fixed-tenors', 'Fixed Deposit')
+        }
+
+        function openMutualFunds() {
+            alert("Mutual Funds module coming soon")
+        }
+
+        function openDollarInvestment() {
+            alert("Dollar Investment module coming soon")
+        }
+
+        function openBonds() {
+            alert("Bonds module coming soon")
+        }
+
+        function openStocks() {
+            alert("Stocks module coming soon")
+        } function openFixedDeposit() {
+            next('step-fd-main', 'Fixed Deposit')
+        }
+
+        function selectFD(days, rate) {
+
+            document.getElementById("fd-selected-tenor").innerText = days + " days"
+            document.getElementById("fd-selected-rate").innerText = rate + "% p.a"
+
+            goBack()
+
+        }
+
+        function formatAmount(el) {
+
+            let v = el.value.replace(/\D/g, "")
+            el.value = v ? Number(v).toLocaleString() : ""
+
+        }// Add these variables to your existing state or global scope
+        let fdState = {
+            amount: 50000,
+            days: 30,
+            rate: 5.5
+        };
+
+        // 1. Updated selectFD to update the state and trigger calculation
+        function selectFD(days, rate) {
+            fdState.days = days;
+            fdState.rate = rate;
+
+            document.getElementById("fd-selected-tenor").innerText = days + " days";
+            document.getElementById("fd-selected-rate").innerText = rate + "% p.a";
+
+            doFDCalc(); // Recalculate based on new tenor
+            goBack();
+        }
+
+        // 2. New Calculation Logic for Fixed Deposit
+        function doFDCalc() {
+            const amountInput = document.getElementById('fd-amount').value.replace(/,/g, "");
+            const P = parseFloat(amountInput) || 0;
+            const r = fdState.rate / 100;
+            const t = fdState.days / 365;
+
+            // Interest = P * r * t
+            const interest = P * r * t;
+            const totalMaturity = P + interest;
+
+            const f = (n) => "₦" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+            // Update Review Screen
+            document.getElementById('fd-review-amount').innerText = f(P);
+            document.getElementById('fd-review-tenor').innerText = fdState.days + " days";
+            document.getElementById('fd-review-rate').innerText = fdState.rate + "%";
+            document.getElementById('fd-review-total').innerText = f(totalMaturity);
+
+            // Update Success Screen
+            document.getElementById('fd-s-amount').innerText = f(P);
+            document.getElementById('fd-s-tenor').innerText = fdState.days + " days";
+            document.getElementById('fd-s-total').innerText = f(totalMaturity);
+        }
+
+        // 3. Update your formatAmount to also trigger the calculation
+        function formatAmount(el) {
+            let v = el.value.replace(/\D/g, "");
+            el.value = v ? Number(v).toLocaleString() : "";
+            doFDCalc(); // Calculate as the user types
         }
     </script>
 
