@@ -15,7 +15,7 @@ body {
 
 /* --- DEVICE CONTAINER --- */
 .phone {
-    width: 390px;
+    width: 100%;
     height: 100vh;
     max-height: 844px;
     /* Standard mobile aspect ratio */
