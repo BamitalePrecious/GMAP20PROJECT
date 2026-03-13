@@ -9,13 +9,12 @@
 body {
     background: #f4f7f9;
     display: flex;
-    justify-content: center;
     color: #1a1a1a;
 }
 
 /* --- DEVICE CONTAINER --- */
 .phone {
-    width: 100%;
+    width: 100vh;
     height: 100vh;
     max-height: 844px;
     /* Standard mobile aspect ratio */
