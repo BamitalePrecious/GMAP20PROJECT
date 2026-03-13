@@ -1089,3 +1089,182 @@ body {
     border-radius: 10px;
     margin-top: 20px;
 }
+
+/* Investment amount input */
+
+.input-group {
+    display: flex;
+    align-items: center;
+    background: #f7f7f7;
+    padding: 18px;
+    border-radius: 12px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.input-group input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 26px;
+    font-weight: 700;
+    width: 100%;
+    margin-left: 10px;
+}
+
+
+
+/* Summary Cards */
+
+.summary-box {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 18px;
+    margin-top: 18px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+
+
+/* Summary Row */
+
+.s-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #f2f2f2;
+    font-size: 14px;
+}
+
+.s-row:last-child {
+    border-bottom: none;
+}
+
+
+
+/* Green profit text */
+
+.green {
+    color: #27ae60;
+    font-weight: 600;
+}
+
+
+
+/* Success Screen */
+
+.success-icon {
+    font-size: 70px;
+    color: #27ae60;
+    margin-bottom: 20px;
+}
+
+
+
+/* Money Market Header Card */
+
+.mf-summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #ffffff;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.mf-summary h4 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.mf-summary p {
+    margin: 0;
+    font-size: 12px;
+    color: #888;
+}
+
+
+
+/* Small text */
+
+.min-text {
+    font-size: 12px;
+    color: #888;
+    margin-top: 6px;
+}
+
+
+
+/* Buttons */
+
+.btn-red {
+    width: 100%;
+    background: #d80000;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 25px;
+    cursor: pointer;
+}
+
+.btn-grey {
+    width: 100%;
+    background: #f1f1f1;
+    border: none;
+    padding: 16px;
+    border-radius: 10px;
+    color: #333;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 12px;
+    cursor: pointer;
+}
+
+
+
+/* Success Message */
+
+.success-msg {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.success-msg h3 {
+    margin-top: 15px;
+    font-size: 18px;
+}
+
+.success-msg p {
+    color: #888;
+    font-size: 14px;
+}
+
+.success-container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.success-icon {
+    font-size: 60px;
+    color: #27ae60;
+    margin-bottom: 15px;
+}
+
+.success-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.success-text {
+    color: #888;
+    font-size: 14px;
+    margin-bottom: 25px;
+}

@@ -71,7 +71,7 @@
 
             <div class="card acc-card">
                 <p class="acc-num">Account: 2 1 0 6 1 7 0 6 4 7</p>
-                <h2 class="balance-amt">NGN <span class="sec-val">98,800,039.84</span> <i
+                <h2 class="balance-amt">NGN <span class="sec-val" id="dashboard-balance"></span><i
                         class="fa-regular fa-eye-slash" style="font-size:16px; color:#ccc;" onclick="toggleEye()"></i>
                 </h2>
                 <p style="font-size:12px; color:#888; margin-top:8px;">Savings Account</p>
@@ -359,7 +359,7 @@
 
                         <span style="font-size:24px; font-weight:bold;">₦</span>
 
-                        <input type="text" placeholder="500,000" oninput="formatAmount(this)">
+                        <input type="text" id="mf-amount" placeholder="500,000" oninput="formatAmount(this)">
 
                     </div>
 
@@ -375,16 +375,169 @@
 
                         <div class="s-row">
                             <span>Available Amount</span>
-                            <strong>₦1,050,000</strong>
+                            <strong class="available-balance"></strong>
                         </div>
 
                     </div>
 
 
-                    <button class="btn-grey">
+                    <button class="btn-red" onclick="calculateMF()">
+                        Continue
+                    </button>
+                </div>
+                <div id="step-mf-review" class="step" style="display:none;">
+
+                    <h3 style="margin-bottom:20px;">Money Market Funds</h3>
+
+                    <div class="summary-box">
+
+                        <div class="s-row">
+                            <span>Investment Amount</span>
+                            <strong id="mf-invest-amount"></strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Interest Rate</span>
+                            <strong>15% p.a</strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Holding Period</span>
+                            <strong>30 Days</strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Estimated Return</span>
+                            <strong class="green" id="mf-return"></strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Estimated Value</span>
+                            <strong id="mf-value"></strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="summary-box">
+
+                        <div class="s-row">
+                            <span>Debit Account</span>
+                            <strong>Savings Account</strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Available Amount</span>
+                            <strong class="available-balance"></strong>
+                        </div>
+
+                    </div>
+
+
+                    <button class="btn-red" onclick="next('step-mf-confirm','Review Investment')">
                         Continue
                     </button>
 
+                </div>
+                <div id="step-mf-confirm" class="step" style="display:none;">
+
+                    <p style="color:#888; font-size:14px; margin-bottom:20px;">
+                        Please review your investment details before proceeding.
+                    </p>
+
+                    <div class="summary-box">
+
+                        <div class="s-row">
+                            <span>Debit Account</span>
+                            <strong>Savings Account</strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Available Amount</span>
+                            <strong class="available-balance"></strong>
+                        </div>
+
+                    </div>
+
+                    <div class="summary-box">
+
+                        <h4 style="margin-bottom:10px;">Investment Summary</h4>
+
+                        <div class="s-row">
+                            <span>Fund Name</span>
+                            <strong>Money Market Fund</strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Investment Amount</span>
+                            <strong id="mf-r-amount"></strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Interest Rate</span>
+                            <strong>15% p.a</strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Total amount to Debit</span>
+                            <strong id="mf-r-debit"></strong>
+                        </div>
+
+                    </div>
+
+
+                    <button class="btn-red" onclick="confirmMF()">
+                        Confirm Investment
+                    </button>
+
+                    <button class="btn-grey" onclick="goBack()">Go Back</button>
+
+                </div>
+                <div id="step-mf-success" class="step" style="display:none;">
+
+                    <div style="text-align:center; margin-top:40px;">
+                        <i class="fa-solid fa-circle-check" style="font-size:60px; color:#27ae60;"></i>
+
+                        <h3 style="margin-top:20px;">
+                            You have successfully invested
+                        </h3>
+
+                        <p style="color:#888; font-size:14px;">
+                            <span id="mf-s-invest"></span> in the Money Market Fund.
+                        </p>
+
+                    </div>
+
+
+                    <div class="summary-box">
+
+                        <h4 style="margin-bottom:10px;">Investment Summary</h4>
+
+                        <div class="s-row">
+                            <span>Fund Name</span>
+                            <strong>Money Market Fund</strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Investment Amount</span>
+                            <strong id="mf-s-amount"></strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Interest Rate</span>
+                            <strong>15% p.a</strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Total amount to Debit</span>
+                            <strong id="mf-s-debit"></strong>
+                        </div>
+
+                    </div>
+
+                    <button class="btn-red" onclick="finishInvestment()">
+                        Back to Investments
+                    </button>
                 </div>
                 <div id="step-fd-main" class="step" style="display:none;">
 
@@ -416,7 +569,7 @@
 
                     </div>
 
-                    <button class="btn-red" onclick="next('step-fd-review','Review Deposit')">
+                    <button class="btn-red" onclick="validateFD()">
                         Continue
                     </button>
 
@@ -452,26 +605,29 @@
                         </div>
                         <div class="review-row-flex">
                             <span>Available Amount</span>
-                            <strong class="dark-text">₦1,050,000</strong>
+                            <strong class="available-balance"></strong>
+
+                            </strong>
                         </div>
                     </div>
 
                     <div class="review-card-white">
                         <h4 class="summary-title">Investment Summary</h4>
                         <div class="review-row-flex"><span>Investment Amount</span><strong class="dark-text"
-                                id="fd-review-amount">₦300,000</strong></div>
-                        <div class="review-row-flex"><span>Tenor</span><strong class="dark-text" id="fd-review-tenor">90
-                                days</strong></div>
+                                id="fd-review-amount"></strong></div>
+                        <div class="review-row-flex"><span>Tenor</span><strong class="dark-text"
+                                id="fd-review-tenor"></strong></div>
                         <div class="review-row-flex"><span>Tenor starts</span><strong
                                 class="dark-text">10-03-26</strong></div>
                         <div class="review-row-flex"><span>Tenor matures</span><strong
                                 class="dark-text">08-06-26</strong></div>
                         <div class="review-row-flex"><span>Interest rate</span><strong class="dark-text"
-                                id="fd-review-rate">6.5%</strong></div>
+                                id="fd-review-rate"></strong></div>
                         <div class="review-row-flex"><span>Net Interest</span><strong class="green-text"
-                                id="fd-review-net">+₦4,808.22</strong></div>
+                                id="fd-review-net"></strong>
+                        </div>
                         <div class="review-row-flex"><span>Total at Maturity</span><strong class="dark-text"
-                                id="fd-review-total">₦304,808.22</strong></div>
+                                id="fd-review-total"></strong></div>
                     </div>
 
                     <div class="penalty-warning">
@@ -479,7 +635,7 @@
                         <span>Fixed deposits may incur penalties if funds are withdrawn before the maturity date.</span>
                     </div>
 
-                    <button class="btn-red" onclick="next('step-fd-success','Deposit Successful')">Continue</button>
+                    <button class="btn-red" onclick="confirmFD()">Continue</button>
                     <button class="btn-grey-outline" onclick="goBack()">Go Back</button>
                 </div>
                 <div id="step-fd-success" class="step" style="display:none;">
@@ -513,12 +669,12 @@
 
                     </div>
 
-                    <button class="btn-red" onclick="location.reload()">
+                    <!-- <button class="btn-red" onclick="location.reload()">
                         View Portfolio
-                    </button>
+                    </button> -->
 
-                    <button class="btn-grey" onclick="location.reload()">
-                        Back to Dashboard
+                    <button class="btn-red" onclick="goToInvestmentsHome()">
+                        Back to Investments
                     </button>
 
                 </div>
@@ -572,7 +728,8 @@
                     </div>
                     <div class="summary-box" style="margin-bottom:20px;">
                         <div class="s-row"><span>Debit Account</span><strong>Savings Account</strong></div>
-                        <div class="s-row"><span>Available Balance</span><strong>₦1,050,000</strong></div>
+                        <div class="s-row"><span>Available Balance</span><strong class="available-balance"></strong>
+                        </div>
                     </div>
                     <div class="summary-box">
                         <h4 style="margin-bottom:15px; font-size:15px;">Investment Summary</h4>
@@ -607,65 +764,108 @@
                             <span>Total Return</span><strong id="r-total">₦10,000</strong>
                         </div>
                     </div>
-                    <button class="btn-red" onclick="next('step-success', 'Investment in Progress')">Confirm &
+                    <button class="btn-red" onclick="confirmTB()">Confirm &
                         Pay</button>
                     <button class="btn-grey" onclick="goBack()">Go Back</button>
                 </div>
 
                 <div id="step-success" class="step" style="display:none;">
-                    <p style="color:#888; font-size:14px; margin-bottom:25px;">Your investment is being processed and
-                        will appear in your portfolio shortly.</p>
-                    <div class="summary-box">
-                        <div class="s-row"><span>Investment Type</span><strong>Treasury Bills</strong></div>
-                        <div class="s-row"><span>Purchase Price</span><strong id="suc-price">₦9,626.03</strong></div>
-                        <div class="s-row"><span>Tenor</span><strong id="suc-tenor">91 days</strong></div>
-                        <div class="s-row"><span>Total Return</span><strong id="suc-total">₦10,000</strong></div>
+
+                    <div class="success-container">
+
+                        <div class="success-icon">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+
+                        <h3 class="success-title">Investment Successful</h3>
+
+                        <p class="success-text">
+                            Your Treasury Bills investment has been successfully placed.
+                        </p>
+
                     </div>
-                    <button class="btn-red" style="margin-top:20px;" onclick="location.reload()">View Portfolio</button>
-                    <button class="btn-grey" onclick="location.reload()">Back to Dashboard</button>
+
+                    <div class="summary-box">
+
+                        <div class="s-row">
+                            <span>Investment Type</span>
+                            <strong>Treasury Bills</strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Purchase Price</span>
+                            <strong id="suc-price"></strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Tenor</span>
+                            <strong id="suc-tenor"></strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Total Return</span>
+                            <strong id="suc-total"></strong>
+                        </div>
+
+                    </div>
+
+                    <button class="btn-red" onclick="goToInvestmentsHome()">
+                        Back to Investments
+                    </button>
+
                 </div>
             </div>
         </div>
     </div>
 
-    <script>function handleLogin() {
-            const password = document.getElementById('login-pass').value;
+    <script>let balance = 98800039.84
 
-            // For development, we'll allow any password to proceed
-            // Show a quick alert if empty
-            if (password === "") {
-                alert("Please enter your password");
-                return;
-            }
-
-            // Hide Login, Show Dashboard
-            document.getElementById('login-screen').style.display = 'none';
-            document.getElementById('dashboard-view').style.display = 'block';
-
-            // Trigger any dashboard-specific animations here if needed
-            console.log("Authenticated as: BAMITALE PRECIOUS AYOMIKUN");
+        function formatMoney(n) {
+            return "₦" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
         } function handleLogin() {
-            // Hide Login
             document.getElementById('login-view').style.display = 'none';
-
-            // Show Dashboard
             document.getElementById('dashboard-view').style.display = 'block';
-
-            // Optional: Log success to console
-            console.log("Welcome, Bamitale Precious Ayomikun");
-        }
-        function handleLogin() {
-            // 1. Find the elements
-            const loginScreen = document.getElementById('login-view');
-            const dashboardScreen = document.getElementById('dashboard-view');
-
-            // 2. Hide Login and Show Dashboard
-            loginScreen.style.display = 'none';
-            dashboardScreen.style.display = 'block';
-
-            // 3. Reset scroll position to top of dashboard
             window.scrollTo(0, 0);
         }
+
+        // function handleLogin() {
+        //     const password = document.getElementById('login-pass').value;
+
+        //     // For development, we'll allow any password to proceed
+        //     // Show a quick alert if empty
+        //     if (password === "") {
+        //         alert("Please enter your password");
+        //         return;
+        //     }
+
+        //     // Hide Login, Show Dashboard
+        //     document.getElementById('login-screen').style.display = 'none';
+        //     document.getElementById('dashboard-view').style.display = 'block';
+
+        //     // Trigger any dashboard-specific animations here if needed
+        //     console.log("Authenticated as: BAMITALE PRECIOUS AYOMIKUN");
+        // } function handleLogin() {
+        //     // Hide Login
+        //     document.getElementById('login-view').style.display = 'none';
+
+        //     // Show Dashboard
+        //     document.getElementById('dashboard-view').style.display = 'block';
+
+        //     // Optional: Log success to console
+        //     console.log("Welcome, Bamitale Precious Ayomikun");
+        // }
+        // function handleLogin() {
+        //     // 1. Find the elements
+        //     const loginScreen = document.getElementById('login-view');
+        //     const dashboardScreen = document.getElementById('dashboard-view');
+
+        //     // 2. Hide Login and Show Dashboard
+        //     loginScreen.style.display = 'none';
+        //     dashboardScreen.style.display = 'block';
+
+        //     // 3. Reset scroll position to top of dashboard
+        //     window.scrollTo(0, 0);
+        // }
         let stack = [];
         let state = { tenor: 91, yield: 0.15 };
 
@@ -674,7 +874,8 @@
 
         function openFlow() {
             document.getElementById('master-overlay').style.display = 'flex';
-            next('step-grid', 'Investments');
+            stack = []
+            next('step-grid', 'Investments')
         }
 
         function next(id, title) {
@@ -728,15 +929,25 @@
         }
 
         function goBack() {
-            stack.pop();
-            if (stack.length === 0) {
-                document.getElementById('master-overlay').style.display = 'none';
-            } else {
-                let p = stack.pop();
-                next(p.id, p.title);
-            }
-        }
 
+            stack.pop()
+
+            if (stack.length === 0) {
+
+                document.getElementById('master-overlay').style.display = 'none'
+                return
+
+            }
+
+            let previous = stack[stack.length - 1]
+
+            document.querySelectorAll('.step').forEach(s => s.style.display = 'none')
+
+            document.getElementById(previous.id).style.display = 'block'
+
+            document.getElementById('flow-title').innerText = previous.title
+
+        }
         function toggleEye() {
             document.querySelectorAll('.sec-val').forEach(el => {
                 el.innerText = el.innerText.includes('*') ? "98,800,039.84" : "****";
@@ -830,7 +1041,178 @@
             let v = el.value.replace(/\D/g, "");
             el.value = v ? Number(v).toLocaleString() : "";
             doFDCalc(); // Calculate as the user types
+        } function calculateMF() {
+
+            let input = document.querySelector("#step-mf-invest input").value.replace(/,/g, "")
+            let amount = parseFloat(input) || 0
+
+            let rate = 0.15
+            let days = 30
+
+            let interest = amount * rate * (days / 365)
+            let total = amount + interest
+
+            function f(n) {
+                return "₦" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+            }
+
+            document.getElementById("mf-invest-amount").innerText = f(amount)
+            document.getElementById("mf-return").innerText = "+" + f(interest)
+            document.getElementById("mf-value").innerText = f(total)
+
+            document.getElementById("mf-r-amount").innerText = f(amount)
+            document.getElementById("mf-r-debit").innerText = f(amount)
+
+            document.getElementById("mf-s-amount").innerText = f(amount)
+            document.getElementById("mf-s-invest").innerText = f(amount)
+            document.getElementById("mf-s-debit").innerText = f(amount)
+
+            next('step-mf-review', 'Money Market Funds')
+
+        } function updateBalance() {
+
+            document.getElementById("dashboard-balance").innerText = balance.toLocaleString(undefined, { minimumFractionDigits: 2 })
+
+            document.querySelectorAll(".available-balance").forEach(el => {
+                el.innerText = formatMoney(balance)
+            })
+
+        } function confirmMF() {
+
+            let amount = parseFloat(document.getElementById("mf-amount").value.replace(/,/g, "")) || 0
+
+            if (amount > balance) {
+                alert("Insufficient balance")
+                return
+            }
+
+            balance -= amount
+
+            updateBalance()
+
+            next('step-mf-success', 'Investment Successful')
+
+        } function validateFD() {
+
+            let amountInput = document.getElementById("fd-amount").value.replace(/,/g, "")
+            let amount = parseFloat(amountInput)
+
+            if (!amount) {
+                alert("Please enter an amount to invest.")
+                return
+            }
+
+            if (amount < 50000) {
+                alert("Minimum Fixed Deposit amount is ₦50,000.")
+                return
+            }
+
+            next('step-fd-review', 'Review Investment')
+
+        } function goToInvestmentsHome() {
+
+            stack = []   // VERY IMPORTANT → clears old history
+
+            document.querySelectorAll('.step').forEach(s => s.style.display = 'none')
+
+            document.getElementById('step-grid').style.display = 'block'
+
+            document.getElementById('flow-title').innerText = 'Investments'
+
+            document.getElementById('flow-sub').style.display = 'block'
+
         }
+        function finishInvestment() {
+
+            // 1️⃣ Clear navigation history
+            stack = [];
+
+            // 2️⃣ RESET ALL INPUT AMOUNTS
+            document.getElementById("mf-amount").value = "";
+            document.getElementById("fd-amount").value = "";
+            document.getElementById("amt-in").value = "";
+
+            // 3️⃣ RESET TREASURY BILL STATE
+            state.tenor = 91;
+            state.yield = 0.15;
+
+            // Reset treasury summaries
+            document.getElementById("s-face").innerText = "₦0";
+            document.getElementById("s-price").innerText = "₦0";
+            document.getElementById("s-net").innerText = "₦0";
+            document.getElementById("r-debit").innerText = "₦0";
+            document.getElementById("r-total").innerText = "₦0";
+
+            // 4️⃣ RESET FIXED DEPOSIT STATE
+            fdState.days = 30;
+            fdState.rate = 5.5;
+
+            document.getElementById("fd-selected-tenor").innerText = "30 days";
+            document.getElementById("fd-selected-rate").innerText = "5.5% p.a";
+
+            document.getElementById("fd-review-amount").innerText = "₦0";
+            document.getElementById("fd-review-total").innerText = "₦0";
+
+            // 5️⃣ RESET MUTUAL FUND SUMMARIES
+            document.getElementById("mf-invest-amount").innerText = "₦0";
+            document.getElementById("mf-return").innerText = "₦0";
+            document.getElementById("mf-value").innerText = "₦0";
+
+            // 6️⃣ RESET AVAILABLE BALANCE DISPLAY
+            document.querySelectorAll(".available-balance").forEach(el => {
+                el.innerText = formatMoney(balance);
+            });
+
+            // 7️⃣ RESET CHARTS (clear content)
+            document.querySelectorAll(".mf-chart").forEach(el => {
+                el.innerHTML = "";
+            });
+
+            // 8️⃣ SHOW INVESTMENT HOME FRESH
+            document.querySelectorAll('.step').forEach(s => s.style.display = 'none');
+            document.getElementById('step-grid').style.display = 'block';
+
+            document.getElementById('flow-title').innerText = 'Investments';
+            document.getElementById('flow-sub').style.display = 'block';
+
+            // 9️⃣ SCROLL TO TOP
+            document.querySelector(".flow-content").scrollTop = 0;
+
+        } function confirmTB() {
+
+            let amount = parseFloat(
+                document.getElementById("amt-in").value.replace(/,/g, "")
+            ) || 0
+
+            if (amount > balance) {
+                alert("Insufficient balance")
+                return
+            }
+
+            balance -= amount
+
+            updateBalance()
+
+            next('step-success', 'Investment Successful')
+        } function confirmFD() {
+
+            let amount = parseFloat(
+                document.getElementById("fd-amount").value.replace(/,/g, "")
+            ) || 0
+
+            if (amount > balance) {
+                alert("Insufficient balance")
+                return
+            }
+
+            balance -= amount
+
+            updateBalance()
+
+            next('step-fd-success', 'Deposit Successful')
+        }
+        //must always be at the end of the script to initialize the dashboard balance on page load
+        updateBalance()
     </script>
 
 </body>
