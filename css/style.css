@@ -751,11 +751,13 @@ body {
     font-size: 24px;
 }
 
-css #login-view {
-    height: 100%;
+#login-view {
     width: 100%;
-    background: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=1974&auto=format&fit=crop') center/cover;
-    position: relative;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.9)),
+        url('../images/login_bg.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .login-container {
@@ -956,4 +958,134 @@ css #login-view {
     justify-content: center;
     margin: 0 auto 5px;
     color: white;
+}
+
+/* --- LOGIN VIEW BACKGROUND POSITION FIX --- */
+#login-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    background: linear-gradient(rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.9)),
+        url("../images/login_bg.jpg");
+    background-size: 100%;
+    background-position: center top;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+}
+
+.mf-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f7f7f7;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.mf-card h4 {
+    font-size: 14px;
+}
+
+.mf-card p {
+    font-size: 11px;
+    color: #888;
+    margin-top: 3px;
+}
+
+.btn-red-small {
+    background: #d80000;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.mf-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f7f7f7;
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+}
+
+.mf-left {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.mf-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+
+.mf-icon.yellow {
+    background: #fff5d9;
+    color: #f2c94c;
+}
+
+.mf-icon.green {
+    background: #e6f6f0;
+    color: #27ae60;
+}
+
+.mf-icon.blue {
+    background: #eaf6ff;
+    color: #2d9cdb;
+}
+
+.mf-icon.purple {
+    background: #f5eaff;
+    color: #bb6bd9;
+}
+
+.mf-summary {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: #f7f7f7;
+    padding: 14px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.mf-chart {
+    height: 120px;
+    background: linear-gradient(to top, #ffb3b3, #fff);
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.btn-red-small {
+    background: #d80000;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn-grey {
+    background: #ccc;
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 14px;
+    border-radius: 10px;
+    margin-top: 20px;
 }

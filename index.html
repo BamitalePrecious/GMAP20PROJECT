@@ -15,8 +15,6 @@
         <div id="login-view">
             <div class="login-overlay">
                 <div class="login-header-area">
-                    <img src="https://www.ubagroup.com/nigeria/wp-content/uploads/sites/2/2018/12/uba-logo-white.png"
-                        style="width:80px;">
                 </div>
 
                 <div class="login-form-card">
@@ -185,6 +183,208 @@
                         </div>
 
                     </div>
+                </div><!-- MUTUAL FUNDS LIST -->
+                <div id="step-mf-list" class="step" style="display:none;">
+
+                    <p style="color:#888; font-size:14px; margin-bottom:20px;">
+                        Invest in a professionally managed fund designed to grow your money over time.
+                    </p>
+
+                    <div class="mf-card">
+
+                        <div class="mf-left">
+                            <div class="mf-icon yellow">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+
+                            <div>
+                                <h4>Money Market Fund</h4>
+                                <p>Avg. Return: 15% p.a</p>
+                            </div>
+                        </div>
+
+                        <button class="btn-red-small" onclick="next('step-mf-details','Money Market Funds')">
+                            View Details
+                        </button>
+
+                    </div>
+
+
+                    <div class="mf-card">
+
+                        <div class="mf-left">
+                            <div class="mf-icon green">
+                                <i class="fa-solid fa-shield"></i>
+                            </div>
+
+                            <div>
+                                <h4>Balanced Fund</h4>
+                                <p>Avg. Return: 22.85% p.a</p>
+                            </div>
+                        </div>
+
+                        <button class="btn-red-small">View Details</button>
+
+                    </div>
+
+
+                    <div class="mf-card">
+
+                        <div class="mf-left">
+                            <div class="mf-icon blue">
+                                <i class="fa-solid fa-chart-column"></i>
+                            </div>
+
+                            <div>
+                                <h4>Equity Fund</h4>
+                                <p>Avg. Return: 22.85% p.a</p>
+                            </div>
+                        </div>
+
+                        <button class="btn-red-small">View Details</button>
+
+                    </div>
+
+
+                    <div class="mf-card">
+
+                        <div class="mf-left">
+                            <div class="mf-icon purple">
+                                <i class="fa-regular fa-star"></i>
+                            </div>
+
+                            <div>
+                                <h4>Sukuk Fund</h4>
+                                <p>Avg. Return: 22.85% p.a</p>
+                            </div>
+                        </div>
+
+                        <button class="btn-red-small">View Details</button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MUTUAL FUND DETAILS -->
+                <div id="step-mf-details" class="step" style="display:none;">
+
+                    <div class="review-card-white">
+
+                        <h4>Key Details</h4>
+
+                        <div class="review-row-flex">
+                            <span>Risk Level</span>
+                            <strong>Medium</strong>
+                        </div>
+
+                        <div class="review-row-flex">
+                            <span>Interest Rate</span>
+                            <strong>15% p.a</strong>
+                        </div>
+
+                        <div class="review-row-flex">
+                            <span>Min. Investment</span>
+                            <strong>₦5,000</strong>
+                        </div>
+
+                        <div class="review-row-flex">
+                            <span>Min. Holding Days</span>
+                            <strong>30 Days</strong>
+                        </div>
+
+                        <div class="review-row-flex">
+                            <span>Fund Manager</span>
+                            <strong>UBA Asset Mgt.</strong>
+                        </div>
+
+                        <div class="review-row-flex">
+                            <span>Management Fee</span>
+                            <strong>0.5%</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="review-card-white">
+
+                        <h4>About this Fund</h4>
+
+                        <p style="font-size:13px; color:#666;">
+                            This fund invests in short-term highly liquid instruments such as treasury bills,
+                            commercial papers and bank deposits.
+                            Ideal for conservative investors seeking stable returns.
+                        </p>
+
+                    </div>
+
+
+                    <div class="review-card-white">
+
+                        <h4>Performance</h4>
+
+                        <div class="mf-chart"></div>
+
+                    </div>
+
+
+                    <button class="btn-red" onclick="next('step-mf-invest','Money Market Funds')">
+                        Invest in this Fund
+                    </button>
+
+                </div>
+
+
+
+                <!-- MUTUAL FUND INVESTMENT -->
+                <div id="step-mf-invest" class="step" style="display:none;">
+
+                    <div class="mf-summary">
+
+                        <div class="mf-icon yellow">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+
+                        <div>
+                            <h4>Money Market Funds</h4>
+                            <p>Low Risk • 15% p.a</p>
+                        </div>
+
+                    </div>
+
+
+                    <p style="font-size:13px; color:#888;">Enter Investment Amount</p>
+
+                    <div class="input-group">
+
+                        <span style="font-size:24px; font-weight:bold;">₦</span>
+
+                        <input type="text" placeholder="500,000" oninput="formatAmount(this)">
+
+                    </div>
+
+                    <p style="font-size:12px; color:#888;">Minimum Investment: ₦5,000</p>
+
+
+                    <div class="summary-box">
+
+                        <div class="s-row">
+                            <span>Debit Account</span>
+                            <strong>Savings Account</strong>
+                        </div>
+
+                        <div class="s-row">
+                            <span>Available Amount</span>
+                            <strong>₦1,050,000</strong>
+                        </div>
+
+                    </div>
+
+
+                    <button class="btn-grey">
+                        Continue
+                    </button>
+
                 </div>
                 <div id="step-fd-main" class="step" style="display:none;">
 
@@ -550,7 +750,7 @@
         }
 
         function openMutualFunds() {
-            alert("Mutual Funds module coming soon")
+            next('step-mf-list', 'Mutual Funds')
         }
 
         function openDollarInvestment() {
