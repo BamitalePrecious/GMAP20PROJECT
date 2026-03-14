@@ -88,8 +88,9 @@
                 <div class="service-item">
                     <div class="service-icon"><i class="fa-solid fa-receipt"></i></div><span>Pay Bills</span>
                 </div>
-                <div class="service-item" onclick="openFlow()">
-                    <div class="service-icon"><i class="fa-solid fa-chart-pie"></i></div><span>Invest</span>
+                <div class="service-item" onclick="openPortfolio()">
+                    <div class="service-icon"><i class="fa-solid fa-chart-pie"></i></div><span>Investment
+                        Portfolio</span>
                 </div>
             </div>
 
@@ -107,6 +108,67 @@
                 <div class="nav-item active"><i class="fa-solid fa-house"></i>Home</div>
                 <div class="nav-item"><i class="fa-solid fa-bars"></i>More</div>
             </div>
+        </div>
+
+        <!-- INVESTMENT PORTFOLIO PAGE -->
+        <div id="portfolio-view" style="display:none;">
+
+            <div class="portfolio-header">
+                <i class="fa-solid fa-arrow-left" onclick="closePortfolio()"></i>
+                <h2>My Investments</h2>
+            </div>
+
+            <!-- Total Portfolio Value -->
+            <div class="portfolio-card">
+                <p>Total Portfolio Value</p>
+                <h1>₦0</h1> <!-- <-- start at zero -->
+                <div class="portfolio-growth">
+                    <span>+₦0</span>
+                    <span>▲ 0%</span>
+                </div>
+            </div>
+
+            <!-- Treasury Bills -->
+            <div class="holding-card">
+                <div class="holding-icon green">
+                    <i class="fa-solid fa-file-lines"></i>
+                </div>
+                <div class="holding-info">
+                    <h4>Treasury Bills</h4>
+                    <strong>₦0</strong> <!-- <-- start at zero -->
+                    <p>Maturity: 91 Days &nbsp;&nbsp; Rate: 15% p.a</p>
+                </div>
+            </div>
+
+            <!-- Mutual Funds -->
+            <div class="holding-card">
+                <div class="holding-icon yellow">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <div class="holding-info">
+                    <h4>Mutual Funds</h4>
+                    <strong>₦0</strong> <!-- <-- start at zero -->
+                    <p>Maturity: 30 Days &nbsp;&nbsp; Rate: 15% p.a</p>
+                </div>
+            </div>
+
+            <!-- Fixed Deposit -->
+            <div class="holding-card">
+                <div class="holding-icon purple">
+                    <i class="fa-solid fa-vault"></i>
+                </div>
+                <div class="holding-info">
+                    <h4>Fixed Deposit</h4>
+                    <strong>₦0</strong> <!-- <-- start at zero -->
+                    <p>Maturity: 90 Days &nbsp;&nbsp; Rate: 6.5% p.a</p>
+                </div>
+            </div>
+
+            <div class="portfolio-actions">
+                <button class="btn-red" onclick="openFlow()">Invest More</button>
+                <button class="btn-outline">Withdraw</button>
+            </div>
+
         </div>
 
         <div id="master-overlay">
@@ -818,7 +880,24 @@
         </div>
     </div>
 
-    <script>let balance = 98800039.84
+    <script>
+        let portfolio = {
+            treasuryBills: 0,
+            mutualFunds: 0,
+            fixedDeposit: 0
+        }; function invest(option, amount) {
+            if (amount <= balance) {
+                balance -= amount; // Deduct from user's balance
+                portfolio[option] += amount; // Add to the investment portfolio
+                updatePortfolioDisplay(); // Refresh portfolio page
+                updateBalanceDisplay();
+                alert(`Successfully invested ₦${amount} in ${option}`);
+            } else {
+                alert("Insufficient balance");
+            }
+        }
+
+        let balance = 98800039.84
 
         function formatMoney(n) {
             return "₦" + n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })
@@ -828,44 +907,6 @@
             window.scrollTo(0, 0);
         }
 
-        // function handleLogin() {
-        //     const password = document.getElementById('login-pass').value;
-
-        //     // For development, we'll allow any password to proceed
-        //     // Show a quick alert if empty
-        //     if (password === "") {
-        //         alert("Please enter your password");
-        //         return;
-        //     }
-
-        //     // Hide Login, Show Dashboard
-        //     document.getElementById('login-screen').style.display = 'none';
-        //     document.getElementById('dashboard-view').style.display = 'block';
-
-        //     // Trigger any dashboard-specific animations here if needed
-        //     console.log("Authenticated as: BAMITALE PRECIOUS AYOMIKUN");
-        // } function handleLogin() {
-        //     // Hide Login
-        //     document.getElementById('login-view').style.display = 'none';
-
-        //     // Show Dashboard
-        //     document.getElementById('dashboard-view').style.display = 'block';
-
-        //     // Optional: Log success to console
-        //     console.log("Welcome, Bamitale Precious Ayomikun");
-        // }
-        // function handleLogin() {
-        //     // 1. Find the elements
-        //     const loginScreen = document.getElementById('login-view');
-        //     const dashboardScreen = document.getElementById('dashboard-view');
-
-        //     // 2. Hide Login and Show Dashboard
-        //     loginScreen.style.display = 'none';
-        //     dashboardScreen.style.display = 'block';
-
-        //     // 3. Reset scroll position to top of dashboard
-        //     window.scrollTo(0, 0);
-        // }
         let stack = [];
         let state = { tenor: 91, yield: 0.15 };
 
@@ -1078,20 +1119,18 @@
             })
 
         } function confirmMF() {
-
-            let amount = parseFloat(document.getElementById("mf-amount").value.replace(/,/g, "")) || 0
+            let amount = parseFloat(document.getElementById("mf-amount").value.replace(/,/g, "")) || 0;
 
             if (amount > balance) {
-                alert("Insufficient balance")
-                return
+                alert("Insufficient balance");
+                return;
             }
 
-            balance -= amount
-
-            updateBalance()
-
-            next('step-mf-success', 'Investment Successful')
-
+            balance -= amount;
+            portfolio.mutualFunds += amount; // <— add this
+            updateBalance();
+            updatePortfolioDisplay(); // <— refresh holdings
+            next('step-mf-success', 'Investment Successful');
         } function validateFD() {
 
             let amountInput = document.getElementById("fd-amount").value.replace(/,/g, "")
@@ -1178,41 +1217,90 @@
             // 9️⃣ SCROLL TO TOP
             document.querySelector(".flow-content").scrollTop = 0;
 
-        } function confirmTB() {
+        }
 
-            let amount = parseFloat(
-                document.getElementById("amt-in").value.replace(/,/g, "")
-            ) || 0
-
-            if (amount > balance) {
-                alert("Insufficient balance")
-                return
-            }
-
-            balance -= amount
-
-            updateBalance()
-
-            next('step-success', 'Investment Successful')
-        } function confirmFD() {
-
-            let amount = parseFloat(
-                document.getElementById("fd-amount").value.replace(/,/g, "")
-            ) || 0
+        function confirmTB() {
+            let amount = parseFloat(document.getElementById("amt-in").value.replace(/,/g, "")) || 0;
 
             if (amount > balance) {
-                alert("Insufficient balance")
-                return
+                alert("Insufficient balance");
+                return;
             }
 
-            balance -= amount
+            balance -= amount;
+            portfolio.treasuryBills += amount; // <— add this
+            updateBalance();
+            updatePortfolioDisplay(); // <— refresh holdings
+            next('step-success', 'Investment Successful');
+        }
 
-            updateBalance()
 
-            next('step-fd-success', 'Deposit Successful')
+
+
+
+
+
+
+
+
+
+
+
+
+
+        function confirmFD() {
+            let amount = parseFloat(document.getElementById("fd-amount").value.replace(/,/g, "")) || 0;
+
+            if (!amount) {
+                alert("Please enter an amount to invest.");
+                return;
+            }
+            if (amount < 50000) {
+                alert("Minimum Fixed Deposit amount is ₦50,000.");
+                return;
+            }
+            if (amount > balance) {
+                alert("Insufficient balance");
+                return;
+            }
+
+            balance -= amount;
+            portfolio.fixedDeposit += amount; // <— add this
+            updateBalance();
+            updatePortfolioDisplay(); // <— refresh holdings
+            next('step-fd-success', 'Investment Successful');
         }
         //must always be at the end of the script to initialize the dashboard balance on page load
         updateBalance()
+        function openPortfolio() {
+
+            document.getElementById("dashboard-view").style.display = "none"
+            document.getElementById("portfolio-view").style.display = "block"
+
+        }
+
+        function closePortfolio() {
+
+            document.getElementById("portfolio-view").style.display = "none"
+            document.getElementById("dashboard-view").style.display = "block"
+
+        } function updatePortfolioDisplay() {
+            // Update Treasury Bills
+            document.querySelectorAll(".holding-card").forEach(card => {
+                const title = card.querySelector("h4").innerText;
+                let amount = 0;
+
+                if (title.includes("Treasury Bills")) amount = portfolio.treasuryBills;
+                else if (title.includes("Mutual Funds")) amount = portfolio.mutualFunds;
+                else if (title.includes("Fixed Deposit")) amount = portfolio.fixedDeposit;
+
+                card.querySelector("strong").innerText = formatMoney(amount);
+            });
+
+            // Update total portfolio value
+            const total = portfolio.treasuryBills + portfolio.mutualFunds + portfolio.fixedDeposit;
+            document.querySelector(".portfolio-card h1").innerText = formatMoney(total);
+        }
     </script>
 
 </body>
